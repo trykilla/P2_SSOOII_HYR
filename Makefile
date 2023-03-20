@@ -5,8 +5,7 @@ DIRSRC := src/
 
 #g++ archivo.cpp -o archivo -pthread -std=c++11
 
-CFLAGS := -I$(DIRHEA) -c -Wall -ansi -std=c++11
-LDLIBS := -lpthread -lrt -pthread 
+CFLAGS := -I$(DIRHEA) -pthread -std=c++11
 CC := g++
 
 all : dirs manager #pa, pb
@@ -15,9 +14,7 @@ dirs:
 	mkdir -p $(DIROBJ) $(DIREXE)
 
 manager: 
-	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
-
-$(CC) $(CFLAGS) $^ -o $@
+	$(CC) -o $(DIREXE)manager $(DIRSRC)manager.cpp $(CFLAGS)
 
 test:
 	./$(DIREXE)manager 3 2 5
