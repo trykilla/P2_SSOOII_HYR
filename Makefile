@@ -14,10 +14,10 @@ dirs:
 	mkdir -p $(DIROBJ) $(DIREXE)
 
 manager: 
-	$(CC) -o $(DIREXE)manager $(DIRSRC)manager.cpp $(CFLAGS)
+	$(CC) -o $(DIREXE)manager $(DIRSRC)manager.cpp $(CFLAGS)	
 
 test:
-	./$(DIREXE)manager 3 2 5
+	./$(DIREXE)manager Libros_P2/prueba.txt llamo 12
 
 solution:
 	./$(DIREXE)manager 2 3 4
