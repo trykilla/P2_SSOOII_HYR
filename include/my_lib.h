@@ -5,9 +5,10 @@
 #include <fstream>
 #include <vector>
 #include <ctype.h>
+#include <thread_struct.h>
 
 int count_lines_in_file(std::string file_name);
-void find_word_in_file(std::string file_name);
+void find_word_in_file(std::string file_name, thread_struct &thread_str);
 void my_to_upper(std::string &word);
 bool test_each_symbol(std::string word, std::string current_word);
 
@@ -38,8 +39,9 @@ int count_lines_in_file(std::string file_name)
     return lines_num;
 }
 
-void find_word_in_file(std::string file_name, std::string word)
+void find_word_in_file(std::string file_name, thread_struct &thread_str)
 {
+    int current_line = 0;
     std::fstream file;
     file.open(file_name.c_str());
 
@@ -47,27 +49,41 @@ void find_word_in_file(std::string file_name, std::string word)
     std::string current_word, previous_word;
     std::vector<std::string> matches;
 
-    my_to_upper(word);
+    my_to_upper(thread_str.word);
 
     std::string line;
 
-    while (getline(file, line))
+    while (getline(file, line) && current_line <= thread_str.final_line)
     {
-        std::istringstream ss(line);
-        std::string previous_word, current_word, next_word;
-        while (ss >> current_word)
+        result_struct result_str;
+        if (current_line >= thread_str.initial_line)
         {
-            my_to_upper(current_word);
-            if (test_each_symbol(word, current_word))
+            std::istringstream ss(line);
+            std::string previous_word, current_word, next_word;
+            while (ss >> current_word)
             {
-                std::cout << "\nPrevious word: " << previous_word << "; current word: " << current_word << "; next word: ";
-                if (ss >> next_word)
+                my_to_upper(current_word);
+                if (test_each_symbol(thread_str.word, current_word))
                 {
-                    std::cout << next_word << std::endl;
+                    result_str.pre_word = previous_word;
+                    result_str.post_word = next_word;
+                    result_str.line = current_line + 1;
+
+                    if (ss >> next_word)
+                    {
+
+                        result_str.post_word = next_word;
+                    }
+                    else
+                    {
+                        result_str.post_word = "[No next word in current line]";
+                    }
+                    thread_str.result.push(result_str);
                 }
+                previous_word = current_word;
             }
-            previous_word = current_word;
         }
+        current_line++;
     }
     file.close();
 }
