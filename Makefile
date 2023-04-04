@@ -5,10 +5,11 @@ DIRSRC := src/
 
 #g++ archivo.cpp -o archivo -pthread -std=c++11
 
-CFLAGS := -I$(DIRHEA) -pthread -std=c++11
+CFLAGS := -I$(DIRHEA) -pthread -std=c++17
 CC := g++
 
-all : dirs manager #pa, pb
+all : dirs manager  #pa, pb
+
 
 dirs:
 	mkdir -p $(DIROBJ) $(DIREXE)
@@ -17,7 +18,7 @@ manager:
 	$(CC) -o $(DIREXE)manager $(DIRSRC)manager.cpp $(CFLAGS)	
 
 test:
-	./$(DIREXE)manager Libros_P2/prueba.txt llamo 12
+	./$(DIREXE)manager Libros_P2/prueba.txt david 12
 
 solution:
 	./$(DIREXE)manager 2 3 4
