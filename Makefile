@@ -18,7 +18,7 @@ manager:
 	$(CC) -o $(DIREXE)manager $(DIRSRC)manager.cpp $(CFLAGS)	
 
 test:
-	./$(DIREXE)manager Libros_P2/prueba.txt david 12
+	./$(DIREXE)manager Libros_P2/La-última-sirena.txt ellos 12
 
 solution:
 	./$(DIREXE)manager 2 3 4

@@ -3,14 +3,11 @@
 #include <string>
 #include <queue>
 
-
 #ifndef THREAD_STRUCT_H
 #define THREAD_STRUCT_H
 
-
 struct result_struct
 {
-    
     std::string pre_word;
     std::string post_word;
     int line;

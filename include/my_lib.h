@@ -1,18 +1,13 @@
 #include <iostream>
-#include <thread>
 #include <bits/stdc++.h>
 #include <string>
 #include <fstream>
-#include <vector>
 #include <ctype.h>
-#include <thread_struct.h>
-#include <mutex>
 
 int count_lines_in_file(std::string file_name);
 void my_to_upper(std::string &word);
+void my_to_lower(std::string &word);
 bool test_each_symbol(std::string word, std::string current_word);
-
-
 
 void parse_args(int argc)
 {
@@ -41,8 +36,6 @@ int count_lines_in_file(std::string file_name)
     return lines_num;
 }
 
-
-
 bool test_each_symbol(std::string word, std::string current_word)
 {
     bool flag = false;
@@ -57,4 +50,10 @@ void my_to_upper(std::string &word)
 {
     transform(word.begin(), word.end(), word.begin(), [](unsigned char c)
               { return toupper(c); });
+}
+
+void my_to_lower(std::string &word)
+{
+    transform(word.begin(), word.end(), word.begin(), [](unsigned char c)
+              { return tolower(c); });
 }
