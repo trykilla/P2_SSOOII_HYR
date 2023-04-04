@@ -46,9 +46,7 @@ int main(int argc, char const *argv[])
             final_line = lines_num - 1;
         }
 
-        std::unique_lock<std::shared_mutex> lock(mtx);
         v_thread_struct.push_back(thread_struct{id, init_line, final_line, word, std::queue<result_struct>()});
-        lock.unlock();
 
         v_threads.push_back(std::thread(find_word_in_file, file_name, i));
     }
@@ -123,8 +121,9 @@ void find_word_in_file(std::string file_name, int thread_v_pos)
                     {
                         result_str.post_word = "[No hay palabra posterior]";
                     }
-
+                    std::unique_lock<std::shared_mutex> lock(mtx);
                     v_thread_struct[thread_v_pos].result.push(result_str);
+                    lock.unlock();
                 }
                 previous_word = current_word;
             }
