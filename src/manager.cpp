@@ -167,7 +167,6 @@ void find_word_in_file(std::string file_name, int thread_v_pos)
 
                     my_to_lower(previous_word);
                     result_str.pre_word = previous_word;
-                    //result_str.post_word = next_word;
                     result_str.line = current_line + 1;
 
                     if (words_in_line >> next_word)

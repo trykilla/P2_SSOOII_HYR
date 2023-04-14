@@ -20,8 +20,6 @@ manager:
 test:
 	./$(DIREXE)manager Libros_P2/La-última-sirena.txt ellos 12
 
-solution:
-	./$(DIREXE)manager 2 3 4
 
 clean : 
 	rm -rf *~ core $(DIROBJ) $(DIREXE) $(DIRHEA)*~ $(DIRSRC)*~
